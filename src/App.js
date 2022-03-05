@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
 import QuizCard from "./QuizCard";
-import suffle from "./utils";
+import shuffle from "./utils";
 
 const App = () => {
 
     const [quizzes, setQuizzes] = useState(null);
     const [startGame, setStartGame] = useState(false);
     const [selectedQuestion, setSelectedQuestion] = useState(null);
+    const [selectedQuestionIndex, setSelectedQuestionIndex] = useState(0);
     const [loading, setloading] = useState(false);
 
 
@@ -19,16 +20,27 @@ const App = () => {
         setSelectedQuestion(
             {
                 question: results[0].question,
-                answers: suffle(results[0])
+                answers: shuffle(results[0])
             });
 
         setloading(true);
-        console.log(results);
+
+    }
+
+    const navigateNextQuiz = () => {
+        console.log('Next Quiz');
+        setSelectedQuestion((prevIndex) => {
+            return prevIndex + 1;
+        })
+        setSelectedQuestion({
+            question: quizzes[selectedQuestionIndex].question,
+            answers: shuffle(quizzes[selectedQuestionIndex])
+        })
     }
     return (
         <div>
             <h2>Quiz app</h2>
-            {startGame && loading && <QuizCard selectedQuestion={selectedQuestion} />}
+            {startGame && loading && <QuizCard selectedQuestion={selectedQuestion} navigateNextQuiz={navigateNextQuiz}/>}
             {!startGame && <button onClick={startQuiz}>Start Quiz</button>}
         </div>
     );

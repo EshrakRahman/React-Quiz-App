@@ -1,4 +1,4 @@
-function suffle(quiz) {
+function shuffle(quiz) {
     const results = [quiz.correct_answer, ...quiz.incorrect_answers];
     for (let i = results.length - 1; i > 0; i--){
 
@@ -9,4 +9,4 @@ function suffle(quiz) {
     return results
 }
 
-export default suffle;
+export default shuffle;
