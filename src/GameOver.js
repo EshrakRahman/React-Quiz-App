@@ -4,7 +4,7 @@ const GameOver = ({resetQuiz, gameScore}) => {
 
     return (
         <div>
-            <h3>Total Score: ${gameScore}</h3>
+            <h3>Total Score: {gameScore}</h3>
             <button onClick={resetQuiz}>Reset Quiz</button>
         </div>
     );

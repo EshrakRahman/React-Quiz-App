@@ -3,6 +3,7 @@ import QuizCard from "./QuizCard";
 import shuffle from "./utils";
 import GameOver from "./GameOver";
 
+
 const App = () => {
 
     const [quizzes, setQuizzes] = useState(null);
@@ -41,34 +42,32 @@ const App = () => {
         if (isLastQuestion) {
             setEndGame(true);
         } else {
-            setSelectedQuestionIndex((prevIndex) => {
-                return prevIndex + 1;
-            })
+            const currentIndex = selectedQuestionIndex + 1
+            setSelectedQuestionIndex(currentIndex)
 
             setSelectedQuestion({
-                question: quizzes[selectedQuestionIndex].question,
-                answers: shuffle(quizzes[selectedQuestionIndex])
+                question: quizzes[currentIndex].question,
+                answers: shuffle(quizzes[currentIndex])
             })
-            setCorrectAnswer(quizzes[selectedQuestionIndex].correct_answer)
+            setCorrectAnswer(quizzes[currentIndex].correct_answer)
             setSelectedAnswer(null);
         }
     }
     
     const resetQuiz = () => {
-        console.log('reset');
         setQuizzes(null);
         setStartGame(false);
         setSelectedQuestionIndex(0);
         setSelectedQuestion(null);
         setLoading(false);
         setEndGame(false);
-
+        setGameScore(0);
     }
 
     const selectAnswer = (answer) => {
         setSelectedAnswer(answer)
 
-        if (selectedAnswer === correctAnswer) {
+        if (answer === correctAnswer) {
             setGameScore((prevScore => {
                 return prevScore + 1
             }))
@@ -76,16 +75,18 @@ const App = () => {
     }
     console.log(correctAnswer);
     return (
-        <div>
-            <h2>Quiz app</h2>
+        <div className={'main'}>
+            <h2 className={'text-center'}>Quiz app</h2>
             {endGame && (<GameOver resetQuiz={resetQuiz} gameScore={gameScore}/>)}
             {startGame && loading && !endGame && <QuizCard
                 selectedQuestion={selectedQuestion}
                 navigateNextQuiz={navigateNextQuiz} selectAnswer={selectAnswer}
                 selectedAnswer={selectedAnswer}
                 correctAnswer={correctAnswer}
+                quizzes={quizzes}
+                selectedQuestionIndex={selectedQuestionIndex}
             />}
-            {!startGame && <button onClick={startQuiz}>Start Quiz</button>}
+            {!startGame && <button className={'btn'} onClick={startQuiz}>Start Quiz</button>}
         </div>
     );
 };
