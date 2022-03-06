@@ -1,7 +1,7 @@
 import React from 'react';
 import AnswerCard from "./AnswarCard";
 
-const QuizCard = ({selectedQuestion, navigateNextQuiz, selectAnswer}) => {
+const QuizCard = ({selectedQuestion, navigateNextQuiz, selectAnswer, selectedAnswer, correctAnswer}) => {
     console.log(selectedQuestion);
 
     const navigateNext = () =>{
@@ -13,7 +13,7 @@ const QuizCard = ({selectedQuestion, navigateNextQuiz, selectAnswer}) => {
     return (
         <div>
             <h1>{question}</h1>
-            {answers.map((answer, i) => <AnswerCard key={i} answer={answer} selectAnswer={selectAnswer}/>)}
+            {answers.map((answer, i) => <AnswerCard key={i} answer={answer} selectAnswer={selectAnswer} selectedAnswer={selectedAnswer} correctAnswer={correctAnswer}/>)}
             <button onClick={navigateNext}>Next Question</button>
         </div>
     );

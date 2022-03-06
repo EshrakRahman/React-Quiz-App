@@ -50,6 +50,7 @@ const App = () => {
                 answers: shuffle(quizzes[selectedQuestionIndex])
             })
             setCorrectAnswer(quizzes[selectedQuestionIndex].correct_answer)
+            setSelectedAnswer(null);
         }
     }
     
@@ -71,16 +72,19 @@ const App = () => {
             setGameScore((prevScore => {
                 return prevScore + 1
             }))
-        } else {
-
         }
     }
     console.log(correctAnswer);
     return (
         <div>
             <h2>Quiz app</h2>
-            {endGame && (<GameOver resetQuiz={resetQuiz}/>)}
-            {startGame && loading && !endGame && <QuizCard selectedQuestion={selectedQuestion} navigateNextQuiz={navigateNextQuiz} selectAnswer={selectAnswer}/>}
+            {endGame && (<GameOver resetQuiz={resetQuiz} gameScore={gameScore}/>)}
+            {startGame && loading && !endGame && <QuizCard
+                selectedQuestion={selectedQuestion}
+                navigateNextQuiz={navigateNextQuiz} selectAnswer={selectAnswer}
+                selectedAnswer={selectedAnswer}
+                correctAnswer={correctAnswer}
+            />}
             {!startGame && <button onClick={startQuiz}>Start Quiz</button>}
         </div>
     );
