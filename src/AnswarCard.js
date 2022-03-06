@@ -11,7 +11,7 @@ const AnswerCard = ({answer, selectAnswer, selectedAnswer, correctAnswer}) => {
     console.log(isRightAnswer);
     return (
         <React.Fragment>
-            <ul><li className={`${correctClass} ${wrongClass} ${disableClass}`} onClick={() => {selectAnswer(answer)}}>{answer}</li></ul>
+            <ul className={'answer-list'}><li className={`${correctClass} ${wrongClass} ${disableClass}`} onClick={() => {selectAnswer(answer)}}>{answer}</li></ul>
         </React.Fragment>
     );
 };

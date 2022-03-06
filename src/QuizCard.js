@@ -15,7 +15,7 @@ const QuizCard = ({selectedQuestion, navigateNextQuiz, selectAnswer, selectedAns
             <h3>Question: {selectedQuestionIndex + 1} /{quizzes.length}</h3>
             <h1>{question}</h1>
             {answers.map((answer, i) => <AnswerCard key={i} answer={answer} selectAnswer={selectAnswer} selectedAnswer={selectedAnswer} correctAnswer={correctAnswer}/>)}
-            <button onClick={navigateNext}>Next Question</button>
+            <button className={'btn'} onClick={navigateNext}>Next Question</button>
         </div>
     );
 };
