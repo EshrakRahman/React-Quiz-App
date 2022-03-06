@@ -9,8 +9,11 @@ const App = () => {
     const [startGame, setStartGame] = useState(false);
     const [selectedQuestion, setSelectedQuestion] = useState(null);
     const [selectedQuestionIndex, setSelectedQuestionIndex] = useState(0);
-    const [loading, setloading] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [endGame, setEndGame] = useState(false);
+    const [selectedAnswer, setSelectedAnswer] = useState(null);
+    const [correctAnswer, setCorrectAnswer] = useState(null);
+    const [gameScore, setGameScore] = useState(0);
 
 
     const startQuiz = async () => {
@@ -25,7 +28,9 @@ const App = () => {
                 answers: shuffle(results[0])
             });
 
-        setloading(true);
+        setCorrectAnswer(results[0].correct_answer)
+
+        setLoading(true);
 
     }
 
@@ -44,6 +49,7 @@ const App = () => {
                 question: quizzes[selectedQuestionIndex].question,
                 answers: shuffle(quizzes[selectedQuestionIndex])
             })
+            setCorrectAnswer(quizzes[selectedQuestionIndex].correct_answer)
         }
     }
     
@@ -53,21 +59,28 @@ const App = () => {
         setStartGame(false);
         setSelectedQuestionIndex(0);
         setSelectedQuestion(null);
-        setloading(false);
+        setLoading(false);
         setEndGame(false);
 
-        /*const [quizzes, setQuizzes] = useState(null);
-        const [startGame, setStartGame] = useState(false);
-        const [selectedQuestion, setSelectedQuestion] = useState(null);
-        const [selectedQuestionIndex, setSelectedQuestionIndex] = useState(0);
-        const [loading, setloading] = useState(false);
-        const [endGame, setEndGame] = useState(false);*/
     }
+
+    const selectAnswer = (answer) => {
+        setSelectedAnswer(answer)
+
+        if (selectedAnswer === correctAnswer) {
+            setGameScore((prevScore => {
+                return prevScore + 1
+            }))
+        } else {
+
+        }
+    }
+    console.log(correctAnswer);
     return (
         <div>
             <h2>Quiz app</h2>
             {endGame && (<GameOver resetQuiz={resetQuiz}/>)}
-            {startGame && loading && !endGame && <QuizCard selectedQuestion={selectedQuestion} navigateNextQuiz={navigateNextQuiz}/>}
+            {startGame && loading && !endGame && <QuizCard selectedQuestion={selectedQuestion} navigateNextQuiz={navigateNextQuiz} selectAnswer={selectAnswer}/>}
             {!startGame && <button onClick={startQuiz}>Start Quiz</button>}
         </div>
     );

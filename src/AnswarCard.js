@@ -1,9 +1,10 @@
 import React from 'react';
 
-const AnswerCard = ({answer}) => {
+const AnswerCard = ({answer, selectAnswer}) => {
+
     return (
         <div>
-            <ul><li>{answer}</li></ul>
+            <ul><li onClick={() => {selectAnswer(answer)}}>{answer}</li></ul>
         </div>
     );
 };
