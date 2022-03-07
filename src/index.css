@@ -41,3 +41,15 @@ body{
 .answer-list{
   list-style-type: none;
 }
+
+.correctClass{
+  border: 1px solid green;
+}
+
+.disableClass{
+  border: 1px solid blanchedalmond;
+}
+
+.wrongClass{
+  border: 1px solid red;
+ }
