@@ -42,14 +42,14 @@ body{
   list-style-type: none;
 }
 
-.correctClass{
+.correct-answer{
   border: 1px solid green;
 }
 
-.disableClass{
+.disable-answer{
   border: 1px solid blanchedalmond;
 }
 
-.wrongClass{
+.wrong-answer{
   border: 1px solid red;
  }
